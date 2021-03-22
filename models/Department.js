@@ -1,4 +1,4 @@
-const { UUIDV4, Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 // department model
 class Department extends Model { }
@@ -7,8 +7,7 @@ class Department extends Model { }
 Department.init(
     {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
         },

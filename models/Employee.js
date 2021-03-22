@@ -1,4 +1,4 @@
-const { UUIDV4, Model, DataTypes } = require('sequelize');
+const {  Model, DataTypes, } = require('sequelize');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -8,8 +8,7 @@ class Employee extends Model { }
 Employee.init(
     {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
@@ -37,8 +36,7 @@ Employee.init(
             },
         },
         manager_id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
+            type: DataTypes.INTEGER,
             allowNull: true,
         }
     },
