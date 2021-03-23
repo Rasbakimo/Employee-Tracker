@@ -34,6 +34,7 @@ function options() {
                     'Add a department',
                     'Add a role',
                     'Update employee role',
+                    'Delete an employee',
                     'EXIT'
                     ]
             }).then(function (answer) {
@@ -239,65 +240,17 @@ function addRole() {
 };
 
 // update a role in the database
-const updateRole = () => {
-    const query = `SELECT * FROM role`
-    connection.query(query, (err, results) => {
-        if (err) throw err;
+function updateRole() {
 
-        inquirer.prompt([
-            {
-                name: 'empl',
-                type: 'list',
-                choices: function () {
-                    let choiceArray = results[0].map(choice => choice.full_name);
-                    return choiceArray;
-                },
-                message: 'Select an employee to update their role:'
-            },
-            {
-                name: 'newRole',
-                type: 'list',
-                choices: function () {
-                    let choiceArray = results[1].map(choice => choice.title);
-                    return choiceArray;
-                }
-            }
-        ]).then((answer) => {
-            connection.query(`UPDATE employees 
-            SET role_id = (SELECT id FROM roles WHERE title = ? ) 
-            WHERE id = (SELECT id FROM(SELECT id FROM employees WHERE CONCAT(first_name," ",last_name) = ?) AS tmptable)`, [answer.newRole, answer.empl], (err, results) => {
-                    if (err) throw err;
-                    startApp();
-                })
-        })
-
-
-    })
-
-}
-
+};
 
 //  delete an employee
-const deleteEmployee = () => {
-    connection.query(query, (err, res) => {
-        if (err) throw err;
-        console.log(' ');
-        console.table('All Employees:', res)
-        inquirer.prompt([
-            {
-                name: 'IDtoRemove',
-                type: 'input',
-                message: 'Enter the Employee ID of the person to remove:'
-            }
-        ]).then((answer) => {
-            connection.query(`DELETE FROM employees where ?`, { id: answer.IDtoRemove })
-            startApp();
-        })
-    })
-}
+function deleteEmployee() {
 
+};
 
 // exit the app
 function exitApp() {
     connection.end();
 };
+
